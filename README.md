@@ -1,7 +1,22 @@
-# TECH-CSE
+# Code Sharing Platform.
 
-- This repository is for Tech CSE Projects only.
+## Tech Stack used
+MERN
 
-- You are requested not to share this repository outside IETE.
+## Idea
+I plan to build a platform for developers where they can collaborate ,discuss codes and work together. The platform will also have a white board and video call feature which will
+make the process of algorithm discussion and problem solving more efficient. 
 
-- Please create branches with your name and upload everything related to the summer project inside that.
+## Method of Implementation
+-I will make ue of React for the frontend of website.
+- For making the code editor I'll make use of monaco npm module. 
+- The whiteboard will be implemented using javascript library such as zwibbler and for video calling I'll be using 3rd party applicaition such as jitsi.
+
+## Timeline
+The frontend of the project and code editor implementation will be comepleted by the end of July. Video call feature and whiteboard will be implemented untill mid August.
+
+## Application of project
+The project is made for developers to make it easier for them to collaborate and discuss.
+
+## Expected Outcome
+This project will be a great learning experience as I'll be building a MERN stack webapp and will also learn to integrate 3rd party applications in my webapp.
