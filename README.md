@@ -8,7 +8,7 @@ I plan to build a platform for developers where they can collaborate ,discuss co
 make the process of algorithm discussion and problem solving more efficient. 
 
 ## Method of Implementation
--I will make ue of React for the frontend of website.
+- I will make ue of React for the frontend of website.
 - For making the code editor I'll make use of monaco npm module. 
 - The whiteboard will be implemented using javascript library such as zwibbler and for video calling I'll be using 3rd party applicaition such as jitsi.
 
