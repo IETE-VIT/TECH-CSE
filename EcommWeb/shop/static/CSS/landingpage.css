@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@500&display=swap");
+
+body {
+  font-family: "Baloo Bhai 2", cursive;
+}
+
+:root {
+  --primaryColor: #67bb46;
+  --mainWhite: rgb(255, 255, 255);
+  --mainBlack: rgb(255, 255, 255);
+  --mainGrey: #e8ffca;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
+}
+
+.icons-container {
+  margin-top: 1px;
+  background: #eee;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+}
+
+.icons-container .icons {
+  background: #fff;
+  border: 0.1rem solid rgb(74, 134, 53);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex: 0.5 0.5 12rem;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.icons-container .icons img {
+  height: 5rem;
+  margin-right: 2rem;
+}
+
+.icons-container .icons h3 {
+  color: #333;
+  padding-bottom: 0.5rem;
+}
+
+.icons-container .icons span {
+  color: #555;
+}
+.products {
+  padding: 2rem 0;
+}
+.section-title h2 {
+  margin-top: 0%;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+}
+.products-center {
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 1170px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 2rem;
+}
+.img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.bag-btn {
+  position: absolute;
+  top: 70%;
+  right: 0;
+  background: var(--primaryColor);
+  border: none;
+  text-transform: uppercase;
+  padding: 0.5rem 0.75rem;
+  letter-spacing: var(--mainSpacing);
+  font-weight: bold;
+  transition: var(--mainTransition);
+  transform: translateX(101%);
+  cursor: pointer;
+}
+.bag-btn:hover {
+  color: var(--mainWhite);
+}
+.fa-shopping-cart {
+  margin-right: 0.5rem;
+}
+.img-container:hover .bag-btn {
+  transform: translateX(0);
+}
+.product-img {
+  display: block;
+  width: 100%;
+  min-height: 12rem;
+  transition: var(--mainTransition);
+}
+.img-container:hover .product-img {
+  opacity: 0.5;
+}
+
+.product h3 {
+  text-transform: capitalize;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  letter-spacing: var(--mainSpacing);
+  text-align: center;
+}
+
+.product h4 {
+  margin-top: 0.7rem;
+  letter-spacing: var(--mainSpacing);
+  color: var(--primaryColor);
+  text-align: center;
+}
