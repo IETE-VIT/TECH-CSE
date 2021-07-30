@@ -38,6 +38,7 @@
           </ul>
           <div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if request.user.is_authenticated %}
               <li class="nav-item dropdown mx-2">
                 <a
                   class="nav-link dropdown-toggle text-white"
@@ -47,7 +48,7 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Karthik
+                  {{request.user.username|capfirst}}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                   <li>
@@ -70,7 +71,7 @@
                       >Change Password</a
                     >
                   </li>
-                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                 </ul>
               </li>
               <li class="nav-item mx-2">
@@ -78,6 +79,7 @@
                   >Cart <span class="badge bg-dark"> 4</span></a
                 >
               </li>
+              {% else %}
               <li class="nav-item mx-2">
                 <a href="{% url 'login' %}" class="nav-link text-white"
                   >Login</a
@@ -88,6 +90,7 @@
                   >Register</a
                 >
               </li>
+              {% endif %}
             </ul>
           </div>
         </div>
@@ -99,38 +102,27 @@
     <div class="container">
     <div class="row my-3">
     <div class="col-sm-6 offset-sm-3">
-    <h3 align="center">Welcome Karthik</h3>
+    <h3 align="center">Welcome {{request.user.username|capfirst}}</h3>
    <h3 align="center">Your Addresses</h3>
    <br>
 
    <div class="col-sm-9 offset-sm-1">
    <div class="row">
+   {% for add in custadd%}
     <div class="col-sm-6">
      <div class="card">
       <div class="card-body">
-       <h3>Address 1</h3>
+       <h3>Address {{forloop.counter}}</h3>
        <br>
-       <p>Name: Karthik B</p>
-       <p>Door No. & Apartment: 302 Elite Enclave</p>
-       <p>Street or Locality: MG Road </p>
-       <p>City: Mumbai</p>
-       <p>State: Maharashtra</p>
+       <p>Name: {{add.Name}}</p>
+       <p>Address: {{add.Address}}</p>
+       <p>City: {{add.City}}</p>
+       <p>State: {{add.State}}</p>
+       <p>State: {{add.Pincode}}</p>
       </div>
      </div>
     </div>
-    <div class="col-sm-6">
-     <div class="card">
-      <div class="card-body">
-      <h3>Address 2</h3>
-      <br>
-       <p>Name: Susheel S</p>
-       <p>Door No. & Apartment: 312 Rose Enclave</p>
-       <p>Street or Locality: T Lane </p>
-       <p>City: Kolkata</p>
-       <p>State: West Bengal</p>
-      </div>
-     </div>
-    </div>
+    {% endfor %}
    </div>
   </div>
  </div>
