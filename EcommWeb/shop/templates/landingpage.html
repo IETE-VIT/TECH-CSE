@@ -196,8 +196,6 @@
               alt="product"
               class="product-img"
             />
-            {% comment %} {% if iteminCart %}
-            <button type="button" class="btn btn-danger">Danger</button> {% endcomment %}
             {% else %}
             <form action="/cart">
             <input type="hidden" name="pid" value={{k.id}} id="pid">
@@ -205,7 +203,6 @@
               <i class="fas fa-shopping-cart"></i>
               Add To Cart
               </button>
-            {% comment %} <button type="button" class="btn btn-success">Success</button> {% endcomment %}
             </form> 
             {% endif %}
           </div>
