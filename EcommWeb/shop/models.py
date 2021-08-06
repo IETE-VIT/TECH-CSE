@@ -52,9 +52,8 @@ class Customerdetails(models.Model):
     Pincode = models.IntegerField()
     State = models.CharField(choices=STATE, max_length=100)
 
-
-def __str__(self):
-    return str(self.custname)
+    def __str__(self):
+        return str(self.id)
 
 
 PRODUCT_CHOICES = (('KC', 'Kitchen Cookware'),
@@ -69,11 +68,10 @@ class Product(models.Model):
     product_price = models.FloatField()
     category = models.CharField(choices=PRODUCT_CHOICES, max_length=4)
     stock_condition = models.CharField(choices=STOCK_CHOICES, max_length=3)
-    product_image = models.ImageField(upload_to='prod_image')
+    product_image = models.ImageField(upload_to='images')
 
-
-def __str__(self):
-    return str(self.product_name)
+    def __str__(self):
+        return str(self.id)
 
 
 class Cart(models.Model):
@@ -81,9 +79,12 @@ class Cart(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
+    def __str__(self):
+        return str(self.id)
 
-def __str__(self):
-    return str(self.user)
+    @property
+    def total_indcost(self):
+        return self.quantity * self.product.product_price
 
 
 STATUS = (
@@ -103,4 +104,8 @@ class OrderDetails(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     ordered_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
-        max_length=100, choices=STATUS, default='Pending')
+        max_length=100, choices=STATUS, default='Order Placed')
+
+    @property
+    def total_indcost(self):
+        return self.quantity * self.product.product_price

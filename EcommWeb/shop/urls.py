@@ -9,9 +9,17 @@ from .forms import Login_User, Password_Change, Password_Reset, Password_Set, Cu
 
 urlpatterns = [
 
-    path('', views.home, name='landingpage'),
+    path('', views.Prod_Available.as_view(), name='landingpage'),
 
     path('cart/', views.add_to_cart, name='shoppingcart'),
+
+    path('displaycart/', views.display_cart, name='displaycart'),
+
+    path('increase_cart/', views.add_item, name='itemadd'),
+
+    path('decrease_cart/', views.decrease_item, name='itemred'),
+
+    path('remove_cart/', views.remove_item, name='itemrem'),
 
     path('profile/', views.Cust_Profile.as_view(), name='profile'),
 
@@ -45,5 +53,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 
     path('checkout/', views.checkout, name='ordersummary'),
+
+    path('paymentdone/', views.payment_done, name='paymentdone'),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -80,7 +80,7 @@
                 </ul>
               </li>
               <li class="nav-item mx-2">
-                <a href="{% url 'shoppingcart' %}" class="nav-link text-white"
+                <a href="{% url 'displaycart' %}" class="nav-link text-white"
                   >Cart <span class="badge bg-dark"> 4</span></a
                 >
               </li>
@@ -110,7 +110,7 @@
           <h3 align="center">Enter Your Address</h3>
           <br />
 
-          <form action="" method="post" novalidate class="shadow p-5">
+          <form action="" method="post" novalidate class="shadow p-5" style="border-style:solid">
          {% if messages %}
             {% for message in messages %}
               <p {% if message.tags %} class="alert alert-{{message.tags}} mb-4" {% endif %} align="center"> {{message}} </p>

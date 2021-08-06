@@ -87,7 +87,7 @@
                 </ul>
               </li>
               <li class="nav-item mx-2">
-                <a href="{% url 'shoppingcart' %}" class="nav-link text-white"
+                <a href="{% url 'displaycart' %}" class="nav-link text-white"
                   >Cart <span class="badge bg-dark"> 4</span></a
                 >
               </li>
@@ -188,140 +188,60 @@
         <h2>Kitchen Cookware</h2>
       </div>
       <div class="products-center">
+      {% for k in kitchen %}
         <article class="product">
           <div class="img-container">
             <img
-              src="static/images/kitchen.jpg"
+              src="{{k.product_image.url}}"
               alt="product"
               class="product-img"
             />
-            <button class="bag-btn" data-id="1">
+            {% if iteminCart %}
+            <button type="button" class="btn btn-danger">Danger</button>
+            {% else %}
+            <form action="/cart">
+            <input type="hidden" name="pid" value={{k.id}} id="pid">
+            <button type="submit" class="bag-btn">
               <i class="fas fa-shopping-cart"></i>
               Add To Cart
-            </button>
+              </button>
+            {% comment %} <button type="button" class="btn btn-success">Success</button> {% endcomment %}
+            </form> 
+            {% endif %}
           </div>
-          <h3>Spectra Cooker 3L</h3>
-          <h4>₹2195.00</h4>
+          <h3>{{k.product_name}}</h3>
+          <h4>₹{{k.product_price}}0</h4>
         </article>
-
-        <article class="product">
-          <div class="img-container">
-            <img
-              src="static/images/kitchen3.jpg"
-              alt="product"
-              class="product-img"
-            />
-            <button class="bag-btn" data-id="1">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-          </div>
-          <h3>2-Burner Gas Stove</h3>
-          <h4>₹2139.00</h4>
-        </article>
-
-        <article class="product">
-          <div class="img-container">
-            <img
-              src="static/images/kitchen4.jpeg"
-              alt="product"
-              class="product-img"
-            />
-            <button class="bag-btn" data-id="1">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-          </div>
-          <h3>Cooker Handi 5L</h3>
-          <h4>₹2599.00</h4>
-        </article>
-
-        <article class="product">
-          <div class="img-container">
-            <img
-              src="static/images/kitchen5.jpg"
-              alt="product"
-              class="product-img"
-            />
-            <button class="bag-btn" data-id="1">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-          </div>
-          <h3>Yellow Aluminium Handi</h3>
-          <h4>₹2595.00</h4>
-        </article>
+      {% endfor %}
       </div>
     </section>
 
-    <section class="products">
+   <section class="products">
       <div class="section-title">
         <h2>Deodrants</h2>
       </div>
       <div class="products-center">
+      {% for d in deo %}
         <article class="product">
           <div class="img-container">
             <img
-              src="static/images/deo2.jpg"
+              src="{{d.product_image.url}}"
               alt="product"
               class="product-img"
             />
-            <button class="bag-btn" data-id="1">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-          </div>
-          <h3>Fogg Deo Combo(Pack of 5)</h3>
-          <h4>₹784.00</h4>
-        </article>
 
-        <article class="product">
-          <div class="img-container">
-            <img
-              src="static/images/deo3.jpg"
-              alt="product"
-              class="product-img"
-            />
-            <button class="bag-btn" data-id="1">
+            <form action="/cart">
+            <input type="hidden" name="pid" value={{d.id}} id="pid">
+            <button type="submit" class="bag-btn">
               <i class="fas fa-shopping-cart"></i>
               Add To Cart
             </button>
+            </form>
           </div>
-          <h3>Engage Deo Combo(Pack of 4)</h3>
-          <h4>₹683.00</h4>
+          <h3>{{d.product_name}}</h3>
+          <h4>₹{{d.product_price}}0</h4>
         </article>
-
-        <article class="product">
-          <div class="img-container">
-            <img
-              src="static/images/deo4.jpg"
-              alt="product"
-              class="product-img"
-            />
-            <button class="bag-btn" data-id="1">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-          </div>
-          <h3>Axe Deo Combo(Pack of 3)</h3>
-          <h4>₹610.00</h4>
-        </article>
-
-        <article class="product">
-          <div class="img-container">
-            <img
-              src="static/images/deo5.jpg"
-              alt="product"
-              class="product-img"
-            />
-            <button class="bag-btn" data-id="1">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-          </div>
-          <h3>Villain Perfume(1 pc)</h3>
-          <h4>₹562.00</h4>
-        </article>
+      {% endfor %}
       </div>
     </section>
 
@@ -330,69 +250,26 @@
         <h2>Blended Masalas</h2>
       </div>
       <div class="products-center">
+      {% for bm in masala %}
         <article class="product">
           <div class="img-container">
             <img
-              src="static/images/masala4.jfif"
+              src="{{bm.product_image.url}}"
               alt="product"
               class="product-img"
             />
-            <button class="bag-btn" data-id="1">
+            <form action="/cart">
+            <input type="hidden" name="pid" value={{bm.id}} id="pid">
+            <button type="submit" class="bag-btn">
               <i class="fas fa-shopping-cart"></i>
               Add To Cart
             </button>
+            </form> 
           </div>
-          <h3>Pav Bhaji Masala</h3>
-          <h4>₹70.00</h4>
+          <h3>{{bm.product_name}}</h3>
+          <h4>₹{{bm.product_price}}0</h4>
         </article>
-
-        <article class="product">
-          <div class="img-container">
-            <img
-              src="static/images/masala3.jpg"
-              alt="product"
-              class="product-img"
-            />
-            <button class="bag-btn" data-id="1">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-          </div>
-          <h3>Pani Puri Masala</h3>
-          <h4>₹31.00</h4>
-        </article>
-
-        <article class="product">
-          <div class="img-container">
-            <img
-              src="static/images/masala2.jfif"
-              alt="product"
-              class="product-img"
-            />
-            <button class="bag-btn" data-id="1">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-          </div>
-          <h3>Chole Masala</h3>
-          <h4>₹67.00</h4>
-        </article>
-
-        <article class="product">
-          <div class="img-container">
-            <img
-              src="static/images/masala.jpg"
-              alt="product"
-              class="product-img"
-            />
-            <button class="bag-btn" data-id="1">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-          </div>
-          <h3>Sambhar Masala</h3>
-          <h4>₹34.00</h4>
-        </article>
+      {% endfor %}
       </div>
     </section>
 

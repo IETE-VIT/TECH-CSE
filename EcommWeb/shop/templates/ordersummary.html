@@ -80,7 +80,7 @@
                 </ul>
               </li>
               <li class="nav-item mx-2">
-                <a href="{% url 'shoppingcart' %}" class="nav-link text-white"
+                <a href="{% url 'displaycart' %}" class="nav-link text-white"
                   >Cart <span class="badge bg-dark"> 4</span></a
                 >
               </li>
@@ -104,43 +104,70 @@
     <br />
 
     <div class="container">
-      <div class="row mt-5">
+      <div class="row mt-3">
         <div class="col-sm-6">
-          <h4>Order Summary</h4>
+          <h4 align="center">Order Summary</h4>
           <br />
+          {% for pro in items %}
           <div class="card mb-2">
-            <div class="card-body">
-              <h5>Product: Apples</h5>
-              <p>Quantity: 2</p>
-              <p class="fw-bold">Price: 174.99</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4 offset-sm-1">
-          <h4>Select Shipping Address</h4>
-          <br />
-          <form action="">
-            <div class="card">
-              <div class="card-body">
-                <h5>Karthik Srinivas</h5>
-                <p>Door No 204 Tagore Lane Kolkata</p>
+            <div class="card-body mb-0">
+              <div class="col-sm-3 text-center align-self-center"> <img align="left" src="{{pro.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm mx-3" height="130" width="130"> </div>
+              <div class="newonetitles mt-3 ">
+              <h5 class="mb-2">Product: {{pro.product.product_name}}</h5>
+              <p class="mb-2">Quantity: {{pro.quantity}}</p>
+              <p class="fw-bold mb-1">Price: {{pro.total_indcost}}</p>
               </div>
             </div>
-            <div class="form-check mt-2 mb-5">
-              <input class="form-check-input" type="radio" value="" />
-              <label class="form-check-label fw-bold" for="">
-                Address: 1
+          </div>
+          {% endfor %}
+        </div>
+
+        
+        <div class="col-sm-4 offset-sm-1">
+          <h4 align="center">Select Shipping Address</h4>
+          <br />
+          <form action="/paymentdone">
+          {% for add in address %}
+            <div class="card">
+              <div class="card-body">
+                <h5>{{add.Name}}</h5>
+                <p>{{add.Address}} , {{add.City}} , {{add.State}} , {{add.Pincode}} .</p>
+              </div>
+            </div>
+            <div class="form-check mt-3 mb-4">
+              <input class="form-check-input" type="radio" name="user_id" id="user_id{{forloop.counter}}" value="{{add.id}}" />
+              <label class="form-check-label fw-bold" for="user_id{{forloop.counter}}">
+                Address: {{forloop.counter}}
               </label>
             </div>
+            {% endfor %}
             <div class="text-end">
+            <div class="newonebut" align="center">
               <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">
                 Continue
               </button>
+              </div>
             </div>
           </form>
         </div>
       </div>
     </div>
+
+  <div class="container">
+      <div class="row mt-1">
+      <div class="col-sm-6">
+        <div class="card mb-2">
+          <div class="card-body mb-0">
+          <div class="mb-0">
+          <h5 class="mb-0" align="center"><b>Total Price is: {{total}}</b></h5>
+          </div>  
+           </div>
+          </div>
+           </div>
+            </div>
+          </div>
+
+
 
     <script
       src="https://code.jquery.com/jquery-3.5.1.min.js"
