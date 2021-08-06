@@ -196,8 +196,8 @@
               alt="product"
               class="product-img"
             />
-            {% if iteminCart %}
-            <button type="button" class="btn btn-danger">Danger</button>
+            {% comment %} {% if iteminCart %}
+            <button type="button" class="btn btn-danger">Danger</button> {% endcomment %}
             {% else %}
             <form action="/cart">
             <input type="hidden" name="pid" value={{k.id}} id="pid">
