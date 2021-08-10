@@ -87,9 +87,13 @@
                 </ul>
               </li>
               <li class="nav-item mx-2">
-                <a href="{% url 'displaycart' %}" class="nav-link text-white"
-                  >Cart <span class="badge bg-dark"> 4</span></a
-                >
+              <div class="cart-btn">
+              <span class="nav-icon">
+                <a href="{% url 'displaycart' %}" class="nav-link text-white"><i class="fas fa-cart-plus"></i></a> 
+                  <div class="cart-items">
+                  {{total_products}}
+                  </div>
+                </div>
               </li>
               {% else %}
               <li class="nav-item mx-2">
@@ -188,7 +192,8 @@
         <h2>Kitchen Cookware</h2>
       </div>
       <div class="products-center">
-      {% for k in kitchen %}
+
+      {% for k in kitchen_stockin %}
         <article class="product">
           <div class="img-container">
             <img
@@ -196,7 +201,6 @@
               alt="product"
               class="product-img"
             />
-            {% else %}
             <form action="/cart">
             <input type="hidden" name="pid" value={{k.id}} id="pid">
             <button type="submit" class="bag-btn">
@@ -204,7 +208,24 @@
               Add To Cart
               </button>
             </form> 
-            {% endif %}
+          </div>
+          <h3>{{k.product_name}}</h3>
+          <h4>₹{{k.product_price}}0</h4>
+        </article>
+      {% endfor %}
+
+      {% for k in kitchen_stockoff %}
+        <article class="product">
+          <div class="img-container">
+            <img
+              src="{{k.product_image.url}}"
+              alt="product"
+              class="product-img"
+            />
+            <button type="submit" class="bag-btn" style="background:rgb(236, 84, 84);">
+              <i class="fas fa-shopping-cart"></i>
+              Out Of Stock
+            </button>
           </div>
           <h3>{{k.product_name}}</h3>
           <h4>₹{{k.product_price}}0</h4>
@@ -218,7 +239,7 @@
         <h2>Deodrants</h2>
       </div>
       <div class="products-center">
-      {% for d in deo %}
+      {% for d in deo_stockin %}
         <article class="product">
           <div class="img-container">
             <img
@@ -239,15 +260,34 @@
           <h4>₹{{d.product_price}}0</h4>
         </article>
       {% endfor %}
+
+      {% for d in deo_stockoff %}
+        <article class="product">
+          <div class="img-container">
+            <img
+              src="{{d.product_image.url}}"
+              alt="product"
+              class="product-img"
+            />
+            <button type="submit" class="bag-btn" style="background:rgb(236, 84, 84);">
+              <i class="fas fa-shopping-cart"></i>
+              Out of Stock
+            </button>
+          </div>
+          <h3>{{d.product_name}}</h3>
+          <h4>₹{{d.product_price}}0</h4>
+        </article>
+      {% endfor %}
+
       </div>
     </section>
 
-    <section class="products">
+    <section class="products">  
       <div class="section-title">
         <h2>Blended Masalas</h2>
       </div>
       <div class="products-center">
-      {% for bm in masala %}
+      {% for bm in masala_stockin %}
         <article class="product">
           <div class="img-container">
             <img
@@ -257,7 +297,7 @@
             />
             <form action="/cart">
             <input type="hidden" name="pid" value={{bm.id}} id="pid">
-            <button type="submit" class="bag-btn">
+            <button type="submit" class="bag-btn" id="clicked">
               <i class="fas fa-shopping-cart"></i>
               Add To Cart
             </button>
@@ -267,6 +307,26 @@
           <h4>₹{{bm.product_price}}0</h4>
         </article>
       {% endfor %}
+
+    {% for bm in masala_stockoff %}
+        <article class="product">
+          <div class="img-container">
+            <img
+              src="{{bm.product_image.url}}"
+              alt="product"
+              class="product-img"
+            />
+            <button class="bag-btn" style="background:rgb(236, 84, 84);">
+              <i class="fas fa-shopping-cart"></i>
+              Out of Stock
+            </button>
+          </div>
+          <h3>{{bm.product_name}}</h3>
+          <h4>₹{{bm.product_price}}0</h4>
+        </article>
+      {% endfor %}
+
+
       </div>
     </section>
 
@@ -282,8 +342,5 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="/static/app/js/owl.carousel.min.js"></script>
-    <script src="/static/app/js/all.min.js"></script>
-    <script src="/static/app/js/myscript.js"></script>
   </body>
 </html>

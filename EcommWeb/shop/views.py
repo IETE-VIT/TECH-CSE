@@ -1,4 +1,5 @@
 from itertools import product
+from django.forms import forms
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
@@ -11,28 +12,22 @@ from django.db.models import Q
 
 class Prod_Available(View):
     def get(self, request):
-        kitchen = Product.objects.filter(category='KC')
+        kitchen_stockin = Product.objects.filter(
+            category='KC', stock_condition='IS')
         kitchen_stockoff = Product.objects.filter(
             category='KC', stock_condition='OS')
-        deo = Product.objects.filter(category='DEO')
+        deo_stockin = Product.objects.filter(
+            category='DEO', stock_condition='IS')
         deo_stockoff = Product.objects.filter(
             category='DEO', stock_condition='OS')
-        masala = Product.objects.filter(category='BM')
+        masala_stockin = Product.objects.filter(
+            category='BM', stock_condition='IS')
         masala_stockoff = Product.objects.filter(
             category='BM', stock_condition='OS')
 
-        print(kitchen)
-        productids = Product.objects.all()
-        print(productids)
-
-        print(product)
-
-        iteminCart = False
-        # iteminCart = Cart.objects.filter(
-        #     Q(product=productids.id) & Q(user=request.user)).exists()
-        print(iteminCart)
-        return render(request, 'landingpage.html', {'kitchen': kitchen, 'deo': deo, 'masala': masala,
-                                                    'kitchen_stockoff': kitchen_stockoff, 'deo_stockoff': deo_stockoff, 'masala_stockoff': masala_stockoff, 'iteminCart': iteminCart})
+        return render(request, 'landingpage.html', {'kitchen_stockin': kitchen_stockin, 'deo_stockin': deo_stockin, 'masala_stockin': masala_stockin,
+                                                    'kitchen_stockoff': kitchen_stockoff, 'deo_stockoff': deo_stockoff, 'masala_stockoff': masala_stockoff,
+                                                    })
 
 
 def add_to_cart(request):
@@ -57,16 +52,19 @@ def display_cart(request):
         cart_products = [p for p in Cart.objects.all() if p.user ==
                          request.user]
 
+        total_products = 0
+
         if cart_products:
             for p in cart_products:
                 temp = (p.quantity * p.product.product_price)
+                total_products += p.quantity
                 amount += temp
                 if(amount >= 999.0):
                     shipping = 0.0
                 else:
                     shipping = 60.0
                 total = amount+shipping
-            return render(request, 'shoppingcart.html', {'carts': cart, 'total': total, 'amount': amount, 'shipping': shipping})
+            return render(request, 'shoppingcart.html', {'carts': cart, 'total': total, 'amount': amount, 'shipping': shipping, 'total_products': total_products})
 
         else:
             return render(request, 'emptycart.html')

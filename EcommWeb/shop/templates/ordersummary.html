@@ -11,6 +11,13 @@
       crossorigin="anonymous"
     />
 
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
     <link rel="stylesheet" href="/static/CSS/styles.css" />
 
     <title>Profile Page</title>
@@ -79,10 +86,14 @@
                   <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                 </ul>
               </li>
-              <li class="nav-item mx-2">
-                <a href="{% url 'displaycart' %}" class="nav-link text-white"
-                  >Cart <span class="badge bg-dark"> 4</span></a
-                >
+             <li class="nav-item mx-2">
+              <div class="cart-btn">
+              <span class="nav-icon">
+                <a href="{% url 'displaycart' %}" class="nav-link text-white"><i class="fas fa-cart-plus"></i></a> 
+                  <div class="cart-items">
+                  {{total_products}}
+                  </div>
+                </div>
               </li>
               {% else %}
               <li class="nav-item mx-2">
@@ -157,7 +168,7 @@
       <div class="row mt-1">
       <div class="col-sm-6">
         <div class="card mb-2">
-          <div class="card-body mb-0">
+          <div class="card-body mb-0 btn btn-success">
           <div class="mb-0">
           <h5 class="mb-0" align="center"><b>Total Price is: {{total}}</b></h5>
           </div>  

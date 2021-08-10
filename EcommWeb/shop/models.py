@@ -58,7 +58,7 @@ class Customerdetails(models.Model):
 
 PRODUCT_CHOICES = (('KC', 'Kitchen Cookware'),
                    ('DEO', 'Deodrants'),
-                   ('BM', 'Blended Masalas'))
+                   ('BM', 'Blended Masalas'), ('G', 'Groceries'))
 
 STOCK_CHOICES = (('IS', 'In-Stock'), ('OS', 'Out of Stock'))
 
