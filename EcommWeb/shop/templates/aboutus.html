@@ -1,0 +1,217 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/static/CSS/styles.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
+
+    <title>Profile Page</title>
+    </head>
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'landingpage' %}">ShopFresho</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{% url 'landingpage' %}"
+                >Home</a
+              >
+            </li>
+          </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{% url 'aboutus' %}"
+                >About Us</a
+              >
+            </li>
+          </ul>
+          <div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown mx-2">
+                <a
+                  class="nav-link dropdown-toggle text-white"
+                  href="#"
+                  id="profileDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {{request.user.username|capfirst}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'profile' %}"
+                      >Profile</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'addresses' %}"
+                      >My Addresses</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'orders' %}"
+                      >Orders</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'changepass' %}"
+                      >Change Password</a
+                    >
+                  </li>
+                  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+              </li>
+              	<li class="nav-item mx-2">
+              <div class="cart-btn">
+              <span class="nav-icon">
+                <a href="{% url 'displaycart' %}" class="nav-link text-white"><i class="fas fa-cart-plus"></i></a> 
+                </div>
+              </li>
+              {% else %}
+              <li class="nav-item mx-2">
+                <a href="{% url 'login' %}" class="nav-link text-white"
+                  >Login</a
+                >
+              </li>
+              <li class="nav-item mx-2">
+                <a href="{% url 'register' %}" class="nav-link text-white"
+                  >Register</a
+                >
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+<br>
+    
+
+<div class="card mx-5 mb-2" style="width: 90rem; height:20rem">
+  <div class="card-body">
+    <h2 class="card-title" align="center">ShopFresho – Online Grocery Store</h2><br>
+    <p class="card-text">Did you ever imagine that the freshest of fruits and vegetables, top quality pulses and food grains, dairy products and hundreds of branded items could be handpicked and delivered to your home, all at the click of a button? India’s first comprehensive online megastore, ShopFresho.com, brings a whopping 20000+ products with more than 1000 brands, to over 4 million happy customers.<br><br>
+    From household cleaning products to beauty and makeup, ShopFresho has everything you need for your daily needs.We’ve taken away all the stress associated with shopping for daily essentials, and you can now order all your household products and even buy groceries online without travelling long distances or standing in serpentine queues. <br><br> Add to this the convenience of finding all your requirements at one single source, along with great savings, and you will realize that ShopFresho- India’s largest online supermarket, has revolutionized the way India shops for groceries. Online grocery shopping has never been easier. Need things fresh? Whether it’s fruits and vegetables or dairy and meat, we have this covered as well! Get fresh eggs, meat, fish and more online at your convenience.
+    <br></p>
+  </div>
+</div>
+
+<br>
+<div class="newone" align="center">
+<h2> Customer's Review </h2>
+</div>
+<br>
+
+<div class="newone" align="center">
+   <div class="row mb-4">
+    <div class="col-sm-4 mb-9">
+     <div class="card" style="width: 22rem;">
+    <img src="/static/images/pic-1.png" class="card-img-top mx-5 mt-4"style="width: 16rem;" >
+    <div class="card-body">
+    <h4 class="card-title">Jacob Cole</h4>
+    <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+      <br>
+    <p class="card-text">Amazing platform to buy anything from anywhere. Their delivery facility is too good best delivery boys with warm nature. Easily returnable. Original product at your door which I like the most.The E-commerce website of ShepFresho is very to use.</p>
+     </div>
+    </div>
+    </div>
+
+    <div class="col-sm-4">
+     <div class="card" style="width: 22rem;">
+     <img src="/static/images/pic-2.png" class="card-img-top mx-5 mt-4"style="width: 16rem;" >
+    <div class="card-body">
+    <h4 class="card-title">Karen Gross</h4>
+    <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div><br>
+    <p class="card-text">It's my main shopping website for our business. We buy stationery and office-related supplies from amazon.com and its very cheap and delivers quickly. There is also a GST bill and invoice section helping you to get GST invoices for the purchase.</p>
+    </div>
+    </div>
+  </div>
+
+
+    <div class="col-sm-4">
+     <div class="card" style="width: 22rem;">
+    <img src="/static/images/pic-3.png" class="card-img-top mx-5 mt-4"style="width: 16rem;" >
+    <div class="card-body">
+    <h4 class="card-title">Eddie Dennis</h4>
+    <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div> <br>
+    <p class="card-text">It is one of the best online site.Whenever I buy something, ShopFresho is the first choice. I usually get the product before the date they say it can be delivered. Good customer service. On time delivery. Best quality product. My whole family like this product. </p>
+     </div>
+   </div>
+  </div>
+</div>
+
+
+
+<div class="card mx-5 mt-5 mb-2" style="width: 90rem; height:30rem">
+  <div class="card-body">
+  <h3 class="card-title" align="center">India’s Biggest Online Supermarket</h3><br>
+    <p class="Card-text">ShopFresho.com believes in providing the highest level of customer service and is continuously innovating to meet customer expectations. Our On-time Guarantee is one such assurance where we refund 10% of the bill value if the delivery is delayed. For all your order values above Rs. 1000, we provide free delivery. A wide range of imported and gourmet products are available through our express delivery and slotted delivery service. If you ever find an item missing on delivery or want to return a product, you can report it to us within 48 hours for a ‘no-questions-asked’ refund. <br><br>Best quality products for our quality-conscious customers.ShopFresho.com is synonymous with superior quality and continues to strive for higher levels of customer trust and confidence, by taking feedback and giving our customers what they want. We have added the convenience of pre-cut fruits in our Fresho range. If it’s a product category you’re looking to shop from, we’ve made it convenient for you to access all products in a section easily. <br><br> We are proud to be associated closely with the farmers from whom we source our fresh products. Most of our farm-fresh products are sourced directly from farmers, which not only ensures the best prices and freshest products for our customers but also helps the farmers get better prices. With more than 80 Organic Fruits and Vegetables and a wide range of organic staples, ShopFresho has the largest range in the organic products category.</p>
+    <div class="newone" align="center">
+    <a href={% url 'landingpage' %} class="btn btn-success mt-3"><div class="newone" align="center"><i class="fas fa-shopping-basket"></i> Start Shopping</div></a>
+    </div>
+  </div>
+</div>
+
+<script 
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+
+  </body>
+</html>

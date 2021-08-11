@@ -10,23 +10,36 @@ from django.db.models import Q
 # Create your views here.
 
 
+def aboutus(request):
+    return render(request, 'aboutus.html')
+
+
 class Prod_Available(View):
     def get(self, request):
         kitchen_stockin = Product.objects.filter(
             category='KC', stock_condition='IS')
         kitchen_stockoff = Product.objects.filter(
             category='KC', stock_condition='OS')
+        kitchen_less = Product.objects.filter(
+            category='KC', stock_condition='LS')
+
         deo_stockin = Product.objects.filter(
             category='DEO', stock_condition='IS')
         deo_stockoff = Product.objects.filter(
             category='DEO', stock_condition='OS')
+        deo_less = Product.objects.filter(
+            category='DEO', stock_condition='LS')
+
         masala_stockin = Product.objects.filter(
             category='BM', stock_condition='IS')
         masala_stockoff = Product.objects.filter(
             category='BM', stock_condition='OS')
+        masala_less = Product.objects.filter(
+            category='BM', stock_condition='LS')
 
         return render(request, 'landingpage.html', {'kitchen_stockin': kitchen_stockin, 'deo_stockin': deo_stockin, 'masala_stockin': masala_stockin,
                                                     'kitchen_stockoff': kitchen_stockoff, 'deo_stockoff': deo_stockoff, 'masala_stockoff': masala_stockoff,
+                                                    'kitchen_less': kitchen_less, 'deo_less': deo_less, 'masala_less': masala_less
                                                     })
 
 

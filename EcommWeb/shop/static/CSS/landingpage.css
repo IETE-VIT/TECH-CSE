@@ -11,7 +11,8 @@ body {
   --mainGrey: #e8ffca;
   --mainSpacing: 0.1rem;
   --mainTransition: all 0.3s linear;
-  --stockoff:rgb(236, 84, 84);
+
+
 }
 
 .icons-container {
