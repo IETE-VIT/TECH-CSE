@@ -211,13 +211,8 @@
               alt="product"
               class="product-img"
             />
-            <form action="/cart">
-            <input type="hidden" name="pid" value={{k.id}} id="pid">
-            <button type="submit" class="bag-btn">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-              </button>
-            </form> 
+              <a href="{% url 'detail' k.id %}" class="bag-btn" type="submit">View Item
+              <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <h3>{{k.product_name}}</h3>
           <h4>₹{{k.product_price}}0</h4>
@@ -232,13 +227,8 @@
               alt="product"
               class="product-img"
             />
-            <form action="/cart">
-            <input type="hidden" name="pid" value={{k.id}} id="pid">
-            <button type="submit" class="bag-btn" style="background:rgb(255, 210, 8);">
-              <i class="fa fa-cart-plus" aria-hidden="true"></i>
-              ADD TO CART SOON!!!
-              </button>
-            </form> 
+            <a href="{% url 'detail' k.id %}" class="bag-btn" type="submit">View Item
+              <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <h3>{{k.product_name}}</h3>
           <h4>₹{{k.product_price}}0</h4>
@@ -254,10 +244,8 @@
               alt="product"
               class="product-img"
             />
-            <button type="submit" class="bag-btn" style="background:rgb(236, 84, 84);">
-              <i class="fa fa-times" aria-hidden="true"></i>
-              Out Of Stock
-            </button>
+            <a href="{% url 'detail' k.id %}" class="bag-btn" type="submit">View Item
+              <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <h3>{{k.product_name}}</h3>
           <h4>₹{{k.product_price}}0</h4>
@@ -279,14 +267,8 @@
               alt="product"
               class="product-img"
             />
-
-            <form action="/cart">
-            <input type="hidden" name="pid" value={{d.id}} id="pid">
-            <button type="submit" class="bag-btn">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-            </form>
+            <a href="{% url 'detail' d.id %}" class="bag-btn" type="submit">View Item
+              <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <h3>{{d.product_name}}</h3>
           <h4>₹{{d.product_price}}0</h4>
@@ -301,13 +283,8 @@
               alt="product"
               class="product-img"
             />
-            <form action="/cart">
-            <input type="hidden" name="pid" value={{d.id}} id="pid">
-            <button type="submit" class="bag-btn" style="background:rgb(255, 210, 8);">
-              <i class="fa fa-cart-plus" aria-hidden="true"></i>
-              ADD TO CART SOON!!!
-              </button>
-            </form> 
+            <a href="{% url 'detail' d.id %}" class="bag-btn" type="submit">View Item
+              <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <h3>{{d.product_name}}</h3>
           <h4>₹{{d.product_price}}0</h4>
@@ -322,10 +299,8 @@
               alt="product"
               class="product-img"
             />
-            <button type="submit" class="bag-btn" style="background:rgb(236, 84, 84);">
-              <i class="fa fa-times" aria-hidden="true"></i>
-              Out of Stock
-            </button>
+            <a href="{% url 'detail' d.id %}" class="bag-btn" type="submit">View Item
+              <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <h3>{{d.product_name}}</h3>
           <h4>₹{{d.product_price}}0</h4>
@@ -348,13 +323,8 @@
               alt="product"
               class="product-img"
             />
-            <form action="/cart">
-            <input type="hidden" name="pid" value={{bm.id}} id="pid">
-            <button type="submit" class="bag-btn" id="clicked">
-              <i class="fas fa-shopping-cart"></i>
-              Add To Cart
-            </button>
-            </form> 
+           <a href="{% url 'detail' bm.id %}" class="bag-btn" type="submit">View Item
+              <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <h3>{{bm.product_name}}</h3>
           <h4>₹{{bm.product_price}}0</h4>
@@ -369,13 +339,8 @@
               alt="product"
               class="product-img"
             />
-            <form action="/cart">
-            <input type="hidden" name="pid" value={{m.id}} id="pid">
-            <button type="submit" class="bag-btn" style="background:rgb(255, 210, 8);">
-              <i class="fa fa-cart-plus" aria-hidden="true"></i>
-              ADD TO CART SOON!!!
-              </button>
-            </form> 
+            <a href="{% url 'detail' m.id %}" class="bag-btn" type="submit">View Item
+              <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <h3>{{m.product_name}}</h3>
           <h4>₹{{m.product_price}}0</h4>
@@ -390,10 +355,8 @@
               alt="product"
               class="product-img"
             />
-            <button class="bag-btn" style="background:rgb(236, 84, 84);">
-              <i class="fas fa-shopping-cart"></i>
-              Out of Stock
-            </button>
+          <a href="{% url 'detail' bm.id %}" class="bag-btn" type="submit">View Item
+              <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <h3>{{bm.product_name}}</h3>
           <h4>₹{{bm.product_price}}0</h4>

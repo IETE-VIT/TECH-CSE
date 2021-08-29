@@ -1,0 +1,17 @@
+<form action="/cart">
+            <input type="hidden" name="pid" value={{k.id}} id="pid">
+
+<form action="/cart">
+            <input type="hidden" name="pid" value={{k.id}} id="pid">
+
+<form action="/cart">
+            <input type="hidden" name="pid" value={{d.id}} id="pid">
+
+<form action="/cart">
+            <input type="hidden" name="pid" value={{d.id}} id="pid">
+
+ <form action="/cart">
+            <input type="hidden" name="pid" value={{bm.id}} id="pid">
+
+<form action="/cart">
+            <input type="hidden" name="pid" value={{m.id}} id="pid">

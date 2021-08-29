@@ -1,5 +1,5 @@
 from django.forms.models import ModelForm
-from shop.models import Customerdetails
+from shop.models import Customerdetails, ProductReview
 from django import forms
 from django.shortcuts import render
 from django.contrib.auth import password_validation
@@ -63,3 +63,13 @@ class CustProfile_Info(forms.ModelForm):
                    'City': forms.TextInput(attrs={'class': 'form-control'}),
                    'Pincode': forms.NumberInput(attrs={'class': 'form-control'}),
                    'State': forms.Select(attrs={'class': 'form-control'})}
+
+
+class ProdReview(forms.ModelForm):
+    class Meta:
+        model = ProductReview
+        fields = ['reviewer_name', 'review_title', 'review_detail', 'rating']
+        widgets = {'reviewer_name': forms.TextInput(attrs={'class': 'form-control'}),
+                   'review_title': forms.TextInput(attrs={'class': 'form-control'}),
+                   'review_detail': forms.Textarea(attrs={'class': 'form-control'}),
+                   'rating': forms.Select(attrs={'class': 'form-control'})}

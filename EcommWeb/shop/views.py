@@ -3,8 +3,8 @@ from django.forms import forms
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
-from .models import Customerdetails, Product, Cart, OrderDetails
-from .forms import CustRegistration, CustProfile_Info, Login_User
+from .models import Customerdetails, Product, Cart, OrderDetails, ProductReview
+from .forms import CustRegistration, CustProfile_Info, Login_User, ProdReview
 from django.contrib import messages
 from django.db.models import Q
 # Create your views here.
@@ -12,6 +12,13 @@ from django.db.models import Q
 
 def aboutus(request):
     return render(request, 'aboutus.html')
+
+
+class Product_Detail(View):
+    def get(self, request, pk):
+        product = Product.objects.get(pk=pk)
+        reviews = ProductReview.objects.filter(product=product)
+        return render(request, 'details.html', {'product': product, 'reviews': reviews})
 
 
 class Prod_Available(View):
@@ -120,7 +127,7 @@ def add_item(request):
         for p in cart_products:
             temp = (p.quantity * p.product.product_price)
             amount += temp
-            if(amount >= 999.0):
+            if(amount >= 2999.0):
                 shipping = 0.0
             else:
                 shipping = 60.0
@@ -145,7 +152,7 @@ def decrease_item(request):
         for p in cart_products:
             temp = (p.quantity * p.product.product_price)
             amount += temp
-            if(amount >= 999.0):
+            if(amount >= 2999.0):
                 shipping = 0.0
             else:
                 shipping = 60.0
@@ -169,7 +176,7 @@ def remove_item(request):
         for p in cart_products:
             temp = (p.quantity * p.product.product_price)
             amount += temp
-            if(amount >= 999.0):
+            if(amount >= 2999.0):
                 shipping = 0.0
             else:
                 shipping = 60.0
@@ -193,7 +200,7 @@ def checkout(request):
         for p in cart_products:
             temp = (p.quantity * p.product.product_price)
             amount += temp
-            if(amount >= 999.0):
+            if(amount >= 2999.0):
                 shipping = 0.0
             else:
                 shipping = 60.0
@@ -237,3 +244,28 @@ class Cust_Profile(View):
 
             messages.success(request, 'Address Has Been Added Successfully!!')
         return render(request, 'profile.html', {'form': form})
+
+
+class ProductRev(View):
+    def get(self, request):
+        form = ProdReview()
+        return render(request, 'productreview.html', {'form': form})
+
+    def post(self, request):
+        form = ProdReview(request.POST)
+        if form.is_valid():
+            user = request.user
+            proid = request.GET.get('pid')
+            prod_id = Product.objects.get(id=proid)
+            reviewer_name = form.cleaned_data['reviewer_name']
+            review_title = form.cleaned_data['review_title']
+            review_detail = form.cleaned_data['review_detail']
+            rating = form.cleaned_data['rating']
+            cust_review = ProductReview(
+                user=user, reviewer_name=reviewer_name, product=prod_id, review_title=review_title, review_detail=review_detail, rating=rating)
+
+            cust_review.save()
+
+            messages.success(request, 'Review Has Been Added Successfully')
+
+        return render(request, 'productreview.html', {'form': form})

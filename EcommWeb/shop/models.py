@@ -70,6 +70,9 @@ class Product(models.Model):
     category = models.CharField(choices=PRODUCT_CHOICES, max_length=4)
     stock_condition = models.CharField(choices=STOCK_CHOICES, max_length=3)
     product_image = models.ImageField(upload_to='images')
+    stock_left = models.PositiveIntegerField()
+    product_description = models.TextField(default='efaefa')
+    product_cutprice = models.FloatField(default=10)
 
     def __str__(self):
         return str(self.id)
@@ -110,3 +113,25 @@ class OrderDetails(models.Model):
     @property
     def total_indcost(self):
         return self.quantity * self.product.product_price
+
+
+RATING = (
+    ('1-star', '1-star'),
+    ('2-star', '2-star'),
+    ('3-star', '3-star'),
+    ('4-star', '4-star'),
+    ('5-star', '5-star'),
+)
+
+
+class ProductReview(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    review_title = models.CharField(max_length=200)
+    review_detail = models.TextField()
+    rating = models.CharField(
+        max_length=100, choices=RATING)
+    reviewer_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return str(self.product)

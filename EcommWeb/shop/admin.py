@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import (Customerdetails, Product, Cart, OrderDetails)
+from .models import (Customerdetails, Product, Cart,
+                     OrderDetails, ProductReview)
 
 # Register your models here.
 
@@ -26,3 +27,9 @@ class CartModelAdmin(admin.ModelAdmin):
 class OrderPlacedModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'customer',
                     'product', 'quantity', 'ordered_date', 'status']
+
+
+@admin.register(ProductReview)
+class ProductReviewModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'product',
+                    'review_title', 'review_detail', 'rating']

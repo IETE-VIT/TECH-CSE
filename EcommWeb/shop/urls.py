@@ -11,7 +11,11 @@ urlpatterns = [
 
     path('', views.Prod_Available.as_view(), name='landingpage'),
 
+    path('detail/<int:pk>', views.Product_Detail.as_view(), name='detail'),
+
     path('cart/', views.add_to_cart, name='shoppingcart'),
+
+    path('review/', views.ProductRev.as_view(), name='productreview'),
 
     path('aboutus/', views.aboutus, name='aboutus'),
 
