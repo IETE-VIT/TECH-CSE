@@ -73,6 +73,7 @@ class Product(models.Model):
     stock_left = models.PositiveIntegerField()
     product_description = models.TextField(default='efaefa')
     product_cutprice = models.FloatField(default=10)
+    product_offers = models.TextField(max_length=1000, default='efaefa')
 
     def __str__(self):
         return str(self.id)

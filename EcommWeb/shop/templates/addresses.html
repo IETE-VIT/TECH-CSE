@@ -112,11 +112,11 @@
     <div class="col-sm-6 offset-sm-3">
     <h3 align="center">Welcome {{request.user.username|capfirst}}</h3>
    <h3 align="center">Your Addresses</h3>
-   <br>
+   <br><br>
 
    <div class="col-sm offset-sm-1">
    <div class="row">
-   {% for add in custadd%}
+   {% for add in custadd %}
     <div class="col-sm-6" >
      <div class="card">
       <div class="card-body" style="border-style:solid">
@@ -130,7 +130,6 @@
        <p>State: {{add.State}}</p>
        <p>State: {{add.Pincode}}</p>
        <div class="newone" align="center">
-       <a class="remove-cart btn btn-sm btn-danger mr-3"><i class="fa fa-trash mx-0 my-1" align="center" aria-hidden="true"></i> Remove</a
        </div>
       </div>
      </div>
