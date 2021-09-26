@@ -71,9 +71,11 @@ class Product(models.Model):
     stock_condition = models.CharField(choices=STOCK_CHOICES, max_length=3)
     product_image = models.ImageField(upload_to='images')
     stock_left = models.PositiveIntegerField()
-    product_description = models.TextField(default='efaefa')
+    product_description = models.TextField(
+        default='Description about the Product here')
     product_cutprice = models.FloatField(default=10)
-    product_offers = models.TextField(max_length=1000, default='efaefa')
+    product_offers = models.TextField(
+        max_length=1000, default='Offers about the Product here')
 
     def __str__(self):
         return str(self.id)

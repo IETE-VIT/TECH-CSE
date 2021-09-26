@@ -1,12 +1,14 @@
 from itertools import product
 from django.forms import forms
-from django.http.response import JsonResponse
+from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from .models import Customerdetails, Product, Cart, OrderDetails, ProductReview
 from .forms import CustRegistration, CustProfile_Info, Login_User, ProdReview
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 
@@ -17,8 +19,15 @@ def aboutus(request):
 class Product_Detail(View):
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
+        product_in_stock = Product.objects.filter(pk=pk, stock_condition='IS')
+        product_less = Product.objects.filter(pk=pk, stock_condition='LS')
+        product_out_of_stock = Product.objects.filter(
+            pk=pk, stock_condition='OS')
+        item_in_cart = False
+        item_in_cart = Cart.objects.filter(
+            Q(product=product.id) & Q(user=request.user)).exists()
         reviews = ProductReview.objects.filter(product=product)
-        return render(request, 'details.html', {'product': product, 'reviews': reviews})
+        return render(request, 'details.html', {'product': product, 'product_in_stock': product_in_stock, 'product_less': product_less, 'product_out_of_stock': product_out_of_stock, 'reviews': reviews, 'item_in_cart': item_in_cart})
 
 
 class Prod_Available(View):
@@ -62,6 +71,7 @@ def add_to_cart(request):
         return render(request, 'login.html', {'form': form})
 
 
+@login_required
 def display_cart(request):
     if request.user.is_authenticated:
         user = request.user
@@ -90,11 +100,13 @@ def display_cart(request):
             return render(request, 'emptycart.html')
 
 
+@login_required
 def address(request):
     custadd = Customerdetails.objects.filter(user=request.user)
     return render(request, 'addresses.html', {'custadd': custadd})
 
 
+@login_required
 def orders(request):
     order = OrderDetails.objects.filter(user=request.user)
     return render(request, 'orders.html', {'orderplaced': order})
@@ -113,6 +125,7 @@ class CustomerRegisterView(View):
         return render(request, 'register.html', {'form': form})
 
 
+@login_required
 def add_item(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
@@ -138,6 +151,7 @@ def add_item(request):
         return JsonResponse(data)
 
 
+@login_required
 def decrease_item(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
@@ -163,6 +177,7 @@ def decrease_item(request):
         return JsonResponse(data)
 
 
+@login_required
 def remove_item(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
@@ -187,6 +202,7 @@ def remove_item(request):
         return JsonResponse(data)
 
 
+@login_required
 def checkout(request):
     user = request.user
     address = Customerdetails.objects.filter(user=user)
@@ -208,6 +224,7 @@ def checkout(request):
     return render(request, 'ordersummary.html', {'address': address, 'items': items, 'total': total})
 
 
+@login_required
 def payment_done(request):
     user = request.user
     user_id = request.GET.get('user_id')
@@ -224,6 +241,7 @@ def passsuccess(request):
     return render(request, 'passwordchanconfirm.html')
 
 
+@method_decorator(login_required, name='dispatch')
 class Cust_Profile(View):
     def get(self, request):
         form = CustProfile_Info()
@@ -269,3 +287,9 @@ class ProductRev(View):
             messages.success(request, 'Review Has Been Added Successfully')
 
         return render(request, 'productreview.html', {'form': form})
+
+
+def search(request):
+    search = request.GET['search']
+    products = Product.objects.filter(product_name__icontains=search)
+    return render(request, 'search.html', {'products': products})
