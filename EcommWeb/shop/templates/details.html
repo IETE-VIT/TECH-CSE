@@ -20,7 +20,7 @@
       crossorigin="anonymous"
     />
 
-    <title>Product Page</title>
+    <title>Shopping Cart Page</title>
   </head>
   <body>
    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
@@ -48,16 +48,10 @@
               >
             </li>
           </ul>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-1">
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="{% url 'aboutus' %}"
-                >About Us</a
-              >
-            </li>
-          </ul>
+          <form method="get" action="/search" class="d-flex">
+        <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+        <button class="btn btn-danger" type="submit">Search</button>
+      </form>
              </div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if request.user.is_authenticated %}
@@ -123,6 +117,7 @@
       </div>
     </nav>
     <br />
+
   
    {% for s in product_in_stock %}
    <br>
@@ -141,6 +136,7 @@
    <h5 class="fw-light text-decoration-line-through">M.R.P.: ₹{{s.product_cutprice}}0</h5>
    <h5>Deal Price₹{{s.product_price}}0<br><br>
    
+  
    {% if item_in_cart %}
     <a href="{% url 'displaycart' %}" class="btn btn-warning shadow px-5 py-2 ms-4">Go To Cart</a>
    
@@ -151,9 +147,11 @@
     </form>
 
   {% endif %}
-   
-   <a href="{% url 'ordersummary' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
+
    </div>
+
+
+
    <h5 class="mt-5">Available Offers</h5>
    <p>{{s.product_offers}}</p>
    <br>
@@ -175,7 +173,7 @@
    <br>
    <div class="prices mt-2" align="center">
    <div class="alert alert-primary mx-4" role="alert">
-  Items Less in Stock
+  Items Less in Stock. Order Soon
 </div>
    <h5 class="fw-light text-decoration-line-through">M.R.P.: ₹{{sl.product_cutprice}}0</h5>
    <h5>Deal Price₹{{sl.product_price}}0<br><br>
@@ -191,8 +189,8 @@
     </form>
 
   {% endif %}
-   <a href="{% url 'ordersummary' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
-   </div>
+   
+
    <h5 class="mt-5">Available Offers</h5>
    <p>{{sl.product_offers}}</p>
    <br>
@@ -231,7 +229,22 @@
    {% endfor %}
 
   
-<br><br>
+<br>
+
+
+{% for p in item_already_purchased %}
+<div class="alert alert-success mx-5" role="alert">
+<div class="new" align="center">
+  Item Already Purchased on: {{p.ordered_date}}
+  </div>
+</div>
+
+{% endfor %}
+
+<br>
+<br>
+
+
 <div class="container">
     <div class="row my-3">
     <div class="col-sm-6 offset-sm-3">

@@ -23,11 +23,20 @@ class Product_Detail(View):
         product_less = Product.objects.filter(pk=pk, stock_condition='LS')
         product_out_of_stock = Product.objects.filter(
             pk=pk, stock_condition='OS')
-        item_in_cart = False
-        item_in_cart = Cart.objects.filter(
-            Q(product=product.id) & Q(user=request.user)).exists()
         reviews = ProductReview.objects.filter(product=product)
-        return render(request, 'details.html', {'product': product, 'product_in_stock': product_in_stock, 'product_less': product_less, 'product_out_of_stock': product_out_of_stock, 'reviews': reviews, 'item_in_cart': item_in_cart})
+
+        if request.user.is_authenticated:
+            item_already_purchased = False
+            item_already_purchased = OrderDetails.objects.filter(
+                Q(product=pk) & Q(user=request.user))
+            item_in_cart = False
+            item_in_cart = Cart.objects.filter(
+                Q(product=product.id) & Q(user=request.user)).exists()
+
+            return render(request, 'details.html', {'product': product, 'product_in_stock': product_in_stock, 'product_less': product_less, 'product_out_of_stock': product_out_of_stock, 'reviews': reviews, 'item_in_cart': item_in_cart, 'item_already_purchased': item_already_purchased})
+
+        else:
+            return render(request, 'details.html', {'product': product, 'product_in_stock': product_in_stock, 'product_less': product_less, 'product_out_of_stock': product_out_of_stock, 'reviews': reviews})
 
 
 class Prod_Available(View):
@@ -59,6 +68,7 @@ class Prod_Available(View):
                                                     })
 
 
+@login_required
 def add_to_cart(request):
     if request.user.is_authenticated:
         user = request.user
@@ -94,7 +104,8 @@ def display_cart(request):
                 else:
                     shipping = 60.0
                 total = amount+shipping
-            return render(request, 'shoppingcart.html', {'carts': cart, 'total': total, 'amount': amount, 'shipping': shipping, 'total_products': total_products})
+            print(cart_products)
+            return render(request, 'shoppingcart.html', {'carts': cart, 'total': total, 'amount': amount, 'shipping': shipping, 'total_products': total_products, 'cart_products': cart_products})
 
         else:
             return render(request, 'emptycart.html')
@@ -122,6 +133,8 @@ class CustomerRegisterView(View):
         if form.is_valid():
             messages.success(request, 'You have Registered Successfully!!')
             form.save()
+
+        form = CustRegistration()
         return render(request, 'register.html', {'form': form})
 
 
@@ -260,10 +273,13 @@ class Cust_Profile(View):
                                   Name=Name, Address=Address, City=City, State=State, Pincode=Pincode)
             reg.save()
 
+            form = CustProfile_Info()
+
             messages.success(request, 'Address Has Been Added Successfully!!')
         return render(request, 'profile.html', {'form': form})
 
 
+@method_decorator(login_required, name='dispatch')
 class ProductRev(View):
     def get(self, request):
         form = ProdReview()
@@ -275,6 +291,7 @@ class ProductRev(View):
             user = request.user
             proid = request.GET.get('pid')
             prod_id = Product.objects.get(id=proid)
+            products = Product.objects.filter(id=proid)
             reviewer_name = form.cleaned_data['reviewer_name']
             review_title = form.cleaned_data['review_title']
             review_detail = form.cleaned_data['review_detail']
@@ -284,12 +301,20 @@ class ProductRev(View):
 
             cust_review.save()
 
+            form = ProdReview()
+
             messages.success(request, 'Review Has Been Added Successfully')
 
-        return render(request, 'productreview.html', {'form': form})
+        return render(request, 'productreview.html', {'form': form, 'products': products})
 
 
 def search(request):
     search = request.GET['search']
     products = Product.objects.filter(product_name__icontains=search)
-    return render(request, 'search.html', {'products': products})
+    item_in_search = False
+    item_in_search = Product.objects.filter(
+        product_name__icontains=search).exists()
+    if(item_in_search == False):
+        return render(request, 'no_products.html')
+    else:
+        return render(request, 'search.html', {'products': products})

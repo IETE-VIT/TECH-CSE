@@ -11,6 +11,8 @@
       crossorigin="anonymous"
     />
 
+    <link rel="stylesheet" href="/static/CSS/landingpage.css" />
+
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -18,9 +20,7 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="/static/CSS/styles.css" />
-
-    <title>Profile Page</title>
+    <title>Shopping Cart Page</title>
   </head>
   <body>
    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
@@ -48,7 +48,11 @@
               >
             </li>
           </ul>
-          <div>
+          <form method="get" action="/search" class="d-flex">
+        <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+        <button class="btn btn-danger" type="submit">Search</button>
+      </form>
+             </div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if request.user.is_authenticated %}
               <li class="nav-item dropdown mx-2">
@@ -86,7 +90,7 @@
                   <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                 </ul>
               </li>
-             <li class="nav-item mx-2">
+              <li class="nav-item mx-2">
               <div class="cart-btn">
               <span class="nav-icon">
                 <a href="{% url 'displaycart' %}" class="nav-link text-white"><i class="fas fa-cart-plus"></i></a> 
@@ -113,6 +117,7 @@
       </div>
     </nav>
     <br />
+
 
     <div class="container">
       <div class="row mt-3">
